@@ -5,5 +5,6 @@
 int main()
 {
     menu();
+    printf("Teste");
 }
 
