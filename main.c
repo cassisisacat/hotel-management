@@ -12,49 +12,46 @@ struct Tcliente
 typedef struct Tcliente cliente;
 cliente leCliente();
 void imprimeCliente(cliente m);
-void alteraCliente(cliente *m);
+/*void alteraCliente(cliente *m);*/
+void menu();
 int main()
 {
     setlocale(LC_ALL,"portuguese");
+    menu();
+    return 0;
+}
+void menu(){
     cliente m[3];
-    int op,i;
+    int op,i,qtde,voltar;
     do
     {
         system("cls");
+        printf("Bem vindos ao Hotel Descanso Garantido !\n\n");
         printf("Escolha:\n");
         printf("a - Cadastro Cliente\n");
-        printf("b - Alterar informações do cliente\n");
-        printf("c - Mostrar dados do cliente\n");
-        printf("d - Sair do programa.\n");
+        printf("b - Mostrar dados do cliente\n");
+        printf("d - Sair do programa\n");
         op=getchar();
         switch (op)
         {
         case 'a':
-            for (i=0; i<3; i++)
+            printf("Quantos clientes deseja cadastrar?");
+            scanf("%d", &qtde);
+            for (i=0; i<qtde; i++)
             {
                 m[i]=leCliente();
             }
+            printf("Cadastro realizado com sucesso!");
             break;
         case 'b':
-            for (i=0; i<3; i++)
-            {
-                alteraCliente(&m[i]);
-            }
-            break;
-        case 'c':
             for (i=0; i<3; i++)
             {
                 imprimeCliente(m[i]);
             }
             break;
         }
-        if (op!='d')
-        {
-            system("pause");
-        }
     }
     while (op!='d');
-    return 0;
 }
 
 cliente leCliente()
@@ -75,8 +72,10 @@ void imprimeCliente(cliente m)
 {
     printf("Código...: %d\n", m.codigo);
     printf("Nome...: %s\n", m.nome);
-    printf("Telefone...: %.2f",  m.telefone);
+    printf("Telefone...: %.2f\n\n",  m.telefone);
 }
+
+/* FUNÇÃO PARA ALTERAR CLIENTES
 void alteraCliente(cliente *m)
 {
     printf("Codigo.. ");
@@ -89,3 +88,10 @@ void alteraCliente(cliente *m)
     fflush(stdin);
     scanf("%f", &m->telefone);
 }
+
+            case 'c':
+            for (i=0; i<3; i++)
+            {
+                alteraCliente(&m[i]);
+            }
+            break;*/
