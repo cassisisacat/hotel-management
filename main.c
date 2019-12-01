@@ -2,96 +2,127 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include <conio.h>
 struct Tcliente
 {
     int codigo;
-    char nome[100];
+    char nome[100],endereco[100];
     float telefone;
 };
 typedef struct Tcliente cliente;
-cliente leCliente();
-void imprimeCliente(cliente m);
-/*void alteraCliente(cliente *m);*/
-void menu();
+void inclui_cliente(FILE *arquivo);
+int localiza_cliente(FILE *arquivo, int codigo);
+void imprime_cliente(FILE *arquivo);
+void management();
+
 int main()
 {
     setlocale(LC_ALL,"portuguese");
-    menu();
+    management();
     return 0;
 }
-void menu(){
-    cliente m[3];
-    int op,i,qtde,voltar;
+void management()
+{
+    FILE * arquivo;
+    char op;
+    if ((arquivo = fopen("arquivo.txt", "r+b"))==NULL)
+    {
+        printf("Arquivo não exista ... criando arquivo!");
+        if((arquivo = fopen("arquivo.txt", "w+b"))==NULL)
+        {
+            printf("Erro na criação do arquivo!!");
+            exit(1);
+        }
+    }
     do
     {
-        system("cls");
-        printf("Bem vindos ao Hotel Descanso Garantido !\n\n");
-        printf("Escolha:\n");
-        printf("a - Cadastro Cliente\n");
-        printf("b - Mostrar dados do cliente\n");
-        printf("d - Sair do programa\n");
+        printf("HOTEL MANAGEMENT\n\n");
+        printf("a - Cadastrar cliente\n");
+        printf("b - Mostrar clientes\n");
+        printf("c - Sair do programa\n");
+        printf("\nDigite sua opção:\n ");
         op=getchar();
         switch (op)
         {
         case 'a':
-            printf("Quantos clientes deseja cadastrar?");
-            scanf("%d", &qtde);
-            for (i=0; i<qtde; i++)
-            {
-                m[i]=leCliente();
-            }
-            printf("Cadastro realizado com sucesso!");
+            system("clear");
+            printf("PÁGINA DE CADASTRO...\n\n");
+            inclui_cliente(arquivo);
             break;
         case 'b':
-            for (i=0; i<3; i++)
-            {
-                imprimeCliente(m[i]);
-            }
+            system("clear");
+            printf("Aqui está as informações sobre os clientes ...\n\n");
+            imprime_cliente(arquivo);
             break;
         }
     }
-    while (op!='d');
+    while (op!='c');
+    fclose(arquivo);
 }
-
-cliente leCliente()
+void inclui_cliente(FILE *arquivo)
 {
     cliente m;
-    printf("Codigo.. ");
+    int posicao;
+    printf("Digite o código do cliente...:");
     fflush(stdin);
     scanf("%d", &m.codigo);
-    printf("Nome.. ");
-    fflush(stdin);
-    gets(m.nome);
-    printf("Telefone.. ");
-    fflush(stdin);
-    scanf("%f", &m.telefone);
-    return m;
-}
-void imprimeCliente(cliente m)
-{
-    printf("Código...: %d\n", m.codigo);
-    printf("Nome...: %s\n", m.nome);
-    printf("Telefone...: %.2f\n\n",  m.telefone);
-}
-
-/* FUNÇÃO PARA ALTERAR CLIENTES
-void alteraCliente(cliente *m)
-{
-    printf("Codigo.. ");
-    fflush(stdin);
-    scanf("%d", &m->codigo);
-    printf("Nome.. ");
-    fflush(stdin);
-    gets(m->nome);
-    printf("Telefone.. ");
-    fflush(stdin);
-    scanf("%f", &m->telefone);
+    posicao=localiza_cliente(arquivo,m.codigo);
+    if (posicao==-1)
+    {
+        printf("\nDigite o nome do cliente...: ");
+        fflush(stdin);
+        fgets(m.nome,100,stdin);
+        printf("\nDigite o endereço do cliente...: ");
+        fflush(stdin);
+        fgets(m.endereco,100,stdin);
+        printf("\nDigite o telefone do cliente...: ");
+        fflush(stdin);
+        scanf("%f", &m.telefone);
+        fseek(arquivo,0,SEEK_END);
+        fwrite(&m,sizeof(m),1,arquivo);
+        fflush(arquivo);
+    }
+    else{
+    printf("Codigo já existe, inclusão não realizada!");
+    }
 }
 
-            case 'c':
-            for (i=0; i<3; i++)
-            {
-                alteraCliente(&m[i]);
-            }
-            break;*/
+int localiza_cliente(FILE *arquivo,int codigo)
+{
+int posicao=-1,achou=0;
+cliente m;
+fseek(arquivo,0,SEEK_SET);
+fread(&m,sizeof(m),1,arquivo);
+while(!feof(arquivo) && !achou)
+{
+    posicao++;
+    if(m.codigo==codigo)
+    {
+        achou=1;
+    }
+    fread(&m,sizeof(m),1,arquivo);
+}
+if(achou)
+{
+    return posicao;
+}
+else
+{
+    return -1;
+}
+
+}
+
+
+void imprime_cliente(FILE *arquivo){
+    cliente m;
+    fseek(arquivo,0,SEEK_SET);
+    fread(&m,sizeof(m),1,arquivo);
+    while(!feof(arquivo))
+    {
+        printf("Código ->  %d\n", m.codigo);
+        printf("Nome ->  %s\n", m.nome);
+        printf("Endereço  ->  %s\n", m.endereco);
+        printf("Telefone  ->  %f\n", m.telefone);
+        fread(&m,sizeof(m),1,arquivo);
+    }
+}
