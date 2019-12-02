@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+<<<<<<< HEAD
 #include "cliente_struct.h"
 #include "management.h"
 
@@ -59,3 +60,14 @@ void printMenu(){
     printf("\nDigite sua opção:\n ");
     
 }
+=======
+#include "funcoes.c"
+
+
+int main()
+{
+    setlocale(LC_ALL,"portuguese");
+    management();
+    return 0;
+}
+>>>>>>> 6065121f31814f58b7de55467c9bdf1007a69fe1
