@@ -2,66 +2,110 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "cliente_struct.h"
+#include "structs.h"
 #include "management.h"
 
 void printMenu();
+void criarArquivos(FILE *clientes, FILE *funcionarios, FILE *estadias, FILE *quartos);
 
 int main()
 {
     setlocale(LC_ALL, "portuguese");
 
-    FILE *arquivo;
-    char op;
+    FILE *clientes;
+    FILE *funcionarios;
+    FILE *estadias;
+    FILE *quartos;
 
-    if ((arquivo = fopen("arquivo.txt", "r+b")) == NULL)
-    {
+    int op;
+
+    criarArquivos(clientes, funcionarios, estadias, quartos);
+
+    do{
+        printMenu();
+
+        scanf("%d", &op);
+
+        switch (op)
+        {
+        case 1:
+            system("clear");
+            printf("PAGINA DE CADASTRO...\n\n");
+            inclui_cliente(clientes);
+            break;
+        case 2:
+            system("clear");
+            printf("PAGINA DE CADASTRO...\n\n");
+            inclui_funcionario(clientes);
+            break;
+        case 3:
+            system("clear");
+            printf("Aqui esta as informa��es sobre os clientes ...\n\n");
+            imprime_cliente(clientes);
+            break;
+        }
+    } while (op != 4);
+
+    fclose(clientes);
+
+    return 0;
+}
+
+void criarArquivos( FILE *clientes, FILE *funcionarios, FILE *estadias, FILE *quartos){//, FILE *funcionarios ){
+
+    if ((clientes = fopen("clientes.txt", "r+b")) == NULL){
+
         printf("Arquivo não existe ... criando arquivo!");
 
-        if ((arquivo = fopen("arquivo.txt", "w+b")) == NULL)
+        if ((clientes = fopen("clientes.txt", "w+b")) == NULL)
         {
             printf("Erro na criação do arquivo!!");
             exit(1);
         }
     }
 
-    do{
-        printMenu();
+    if ((funcionarios = fopen("funcionarios.txt", "r+b")) == NULL){
 
-        op = getchar();
+        printf("Arquivo não existe ... criando arquivo!");
 
-        switch (op)
+        if ((funcionarios = fopen("funcionarios.txt", "w+b")) == NULL)
         {
-        case 'a':
-            system("clear");
-            printf("PAGINA DE CADASTRO...\n\n");
-            inclui_cliente(arquivo);
-            break;
-        case 'b':
-            system("clear");
-            printf("PAGINA DE CADASTRO...\n\n");
-            inclui_funcionario(arquivo);
-            break;
-        case 'c':
-            system("clear");
-            printf("Aqui esta as informa��es sobre os clientes ...\n\n");
-            imprime_cliente(arquivo);
-            break;
+            printf("Erro na criação do arquivo!!");
+            exit(1);
         }
-    } while (op != 'd');
+    }
 
-    fclose(arquivo);
+    if ((estadias = fopen("estadias.txt", "r+b")) == NULL){
 
-    return 0;
+        printf("Arquivo não existe ... criando arquivo!");
+
+        if ((estadias = fopen("estadias.txt", "w+b")) == NULL)
+        {
+            printf("Erro na criação do arquivo!!");
+            exit(1);
+        }
+    }
+
+    if ((quartos = fopen("quartos.txt", "r+b")) == NULL){
+
+        printf("Arquivo não existe ... criando arquivo!");
+
+        if ((quartos = fopen("quartos.txt", "w+b")) == NULL)
+        {
+            printf("Erro na criação do arquivo!!");
+            exit(1);
+        }
+    }
+
 }
 
 void printMenu(){
 
     printf("HOTEL MANAGEMENT\n\n");
-    printf("a - Cadastrar cliente\n");
-    printf("b - Cadastrar funcionario\n");
-    printf("c - Mostrar clientes\n");
-    printf("d - Sair do programa\n");
-    printf("\nDigite sua opção:\n ");
+    printf("1 - Cadastrar cliente\n");
+    printf("2 - Cadastrar funcionario\n");
+    printf("3 - Mostrar clientes\n");
+    printf("4 - Sair do programa\n");
+    printf("\nDigite sua opção: ");
 
 }

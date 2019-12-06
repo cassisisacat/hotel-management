@@ -9,7 +9,7 @@ void inclui_cliente(FILE *arquivo)
 {
     cliente m;
     int posicao;
-    printf("Digite o código do cliente...:");
+    printf("Digite o cï¿½digo do cliente...:");
     fflush(stdin);
     scanf("%d", &m.codigo);
     posicao = localiza_cliente(arquivo, m.codigo);
@@ -18,7 +18,7 @@ void inclui_cliente(FILE *arquivo)
         printf("\nDigite o nome do cliente...: ");
         fflush(stdin);
         fgets(m.nome, 100, stdin);
-        printf("\nDigite o endereço do cliente...: ");
+        printf("\nDigite o endereï¿½o do cliente...: ");
         fflush(stdin);
         fgets(m.endereco, 100, stdin);
         printf("\nDigite o telefone do cliente...: ");
@@ -30,7 +30,7 @@ void inclui_cliente(FILE *arquivo)
     }
     else
     {
-        printf("Codigo já existe, inclusão não realizada!");
+        printf("Codigo jï¿½ existe, inclusï¿½o nï¿½o realizada!");
     }
 }
 
@@ -38,7 +38,7 @@ void inclui_funcionario(FILE *arquivo)
 {
     funcionario F;
     int posicao;
-    printf("Digite o código do funcionario: ");
+    printf("Digite o cï¿½digo do funcionario: ");
     fflush(stdin);
     scanf("%d", &F.codigo);
     posicao = localiza_cliente(arquivo, F.codigo);
@@ -62,7 +62,7 @@ void inclui_funcionario(FILE *arquivo)
     }
     else
     {
-        printf("Codigo já existe, inclusão não realizada!");
+        printf("Codigo jï¿½ existe, inclusï¿½o nï¿½o realizada!");
     }
 }
 
@@ -98,10 +98,10 @@ void imprime_cliente(FILE *arquivo)
     fread(&m, sizeof(m), 1, arquivo);
     while (!feof(arquivo))
     {
-        printf("Código ->  %d\n", m.codigo);
+        printf("Cï¿½digo ->  %d\n", m.codigo);
         printf("Nome ->  %s\n", m.nome);
-        printf("Endereço  ->  %s\n", m.endereco);
-        printf("Telefone  ->  %f\n", m.telefone);
+        printf("Endereï¿½o  ->  %s\n", m.endereco);
+        printf("Telefone  ->  %f\n\n", m.telefone);
         fread(&m, sizeof(m), 1, arquivo);
     }
 }
