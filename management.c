@@ -4,12 +4,12 @@
 #include <string.h>
 #include "cliente_struct.h"
 #include "management.h"
-
+#include "employee.h"
 void inclui_cliente(FILE *arquivo)
 {
     cliente m;
     int posicao;
-    printf("Digite o cÃ³digo do cliente...:");
+    printf("Digite o código do cliente...:");
     fflush(stdin);
     scanf("%d", &m.codigo);
     posicao = localiza_cliente(arquivo, m.codigo);
@@ -18,7 +18,7 @@ void inclui_cliente(FILE *arquivo)
         printf("\nDigite o nome do cliente...: ");
         fflush(stdin);
         fgets(m.nome, 100, stdin);
-        printf("\nDigite o endereÃ§o do cliente...: ");
+        printf("\nDigite o endereço do cliente...: ");
         fflush(stdin);
         fgets(m.endereco, 100, stdin);
         printf("\nDigite o telefone do cliente...: ");
@@ -30,7 +30,39 @@ void inclui_cliente(FILE *arquivo)
     }
     else
     {
-        printf("Codigo jÃ¡ existe, inclusÃ£o nÃ£o realizada!");
+        printf("Codigo já existe, inclusão não realizada!");
+    }
+}
+
+void inclui_funcionario(FILE *arquivo)
+{
+    funcionario F;
+    int posicao;
+    printf("Digite o código do funcionario: ");
+    fflush(stdin);
+    scanf("%d", &F.codigo);
+    posicao = localiza_cliente(arquivo, F.codigo);
+    if (posicao == -1)
+    {
+        printf("\nDigite o nome do funcionario: ");
+        fflush(stdin);
+        fgets(F.nome, 100, stdin);
+        printf("\nDigite o cargo do funcionario: ");
+        fflush(stdin);
+        fgets(F.cargo, 100, stdin);
+        printf("\nDigite o telefone do funcionario: ");
+        fflush(stdin);
+        scanf("%f", &F.telefone);
+        printf("\nDigite o salario do funcionario: ");
+        fflush(stdin);
+        scanf("%f", &F.telefone);
+        fseek(arquivo, 0, SEEK_END);
+        fwrite(&F, sizeof(F), 1, arquivo);
+        fflush(arquivo);
+    }
+    else
+    {
+        printf("Codigo já existe, inclusão não realizada!");
     }
 }
 
@@ -66,9 +98,9 @@ void imprime_cliente(FILE *arquivo)
     fread(&m, sizeof(m), 1, arquivo);
     while (!feof(arquivo))
     {
-        printf("CÃ³digo ->  %d\n", m.codigo);
+        printf("Código ->  %d\n", m.codigo);
         printf("Nome ->  %s\n", m.nome);
-        printf("EndereÃ§o  ->  %s\n", m.endereco);
+        printf("Endereço  ->  %s\n", m.endereco);
         printf("Telefone  ->  %f\n", m.telefone);
         fread(&m, sizeof(m), 1, arquivo);
     }
