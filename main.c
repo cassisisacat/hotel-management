@@ -16,11 +16,11 @@ int main()
 
     if ((arquivo = fopen("arquivo.txt", "r+b")) == NULL)
     {
-        printf("Arquivo n�o existe ... criando arquivo!");
+        printf("Arquivo não existe ... criando arquivo!");
 
         if ((arquivo = fopen("arquivo.txt", "w+b")) == NULL)
         {
-            printf("Erro na cria��o do arquivo!!");
+            printf("Erro na criação do arquivo!!");
             exit(1);
         }
     }
@@ -34,17 +34,17 @@ int main()
         {
         case 'a':
             system("clear");
-            printf("P�GINA DE CADASTRO...\n\n");
+            printf("PAGINA DE CADASTRO...\n\n");
             inclui_cliente(arquivo);
             break;
         case 'b':
             system("clear");
-            printf("P�GINA DE CADASTRO...\n\n");
+            printf("PAGINA DE CADASTRO...\n\n");
             inclui_funcionario(arquivo);
             break;
         case 'c':
             system("clear");
-            printf("Aqui est� as informa��es sobre os clientes ...\n\n");
+            printf("Aqui esta as informa��es sobre os clientes ...\n\n");
             imprime_cliente(arquivo);
             break;
         }
@@ -62,6 +62,6 @@ void printMenu(){
     printf("b - Cadastrar funcionario\n");
     printf("c - Mostrar clientes\n");
     printf("d - Sair do programa\n");
-    printf("\nDigite sua op��o:\n ");
+    printf("\nDigite sua opção:\n ");
 
 }
