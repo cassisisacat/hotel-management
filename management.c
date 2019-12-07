@@ -80,6 +80,11 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
     fflush(stdin);
     scanf("%d", &estadia.codigo_cliente);
 
+    printf("Digite a quantidade de hospedes na estadia: ");
+    fflush(stdin);
+    scanf("%d", &estadia.qtd_hospedes);
+
+
     printf("Digite a quantidade de dias da estadia: ");
     fflush(stdin);
     scanf("%d", &estadia.qtd_diarias);
