@@ -1,22 +1,29 @@
-struct Tcliente{
+#pragma once
+struct cliente{
 
     int codigo;
     char nome[100], endereco[100], telefone[12];
 
 };
-typedef struct Tcliente cliente;
+typedef struct cliente cliente;
 
-struct employee{
+struct funcionario{
 
     int codigo;
     char nome[100], endereco[100],cargo[100], telefone[12];
     float salario;
 
 };
-typedef struct employee funcionario;
+typedef struct funcionario funcionario;
 
 struct quarto{
 
-    int codigo, capacidade, status;
+    int numero, capacidade, status, valordiaria;
+
+}; typedef struct quarto quarto;
+
+struct estadia{
+
+    int codigo, qtd_diarias, codigo_cliente, qtd_hospedes, numero_quarto;
 
 }; typedef struct quarto quarto;

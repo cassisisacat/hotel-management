@@ -68,7 +68,44 @@ void inclui_funcionario(FILE *arquivo)
     }
 }
 
-void cadastra_quarto(FILE *arq){
+void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
+
+    estadia estadia;
+
+    printf("Digite o codigo de registro da estagia: ");
+    fflush(stdin);
+    scanf("%d", &estadia.codigo);
+
+    printf("Digite o codigo do cliente para a estadia: ");
+    fflush(stdin);
+    scanf("%d", &estadia.codigo_cliente);
+
+    printf("Digite a quantidade de dias da estadia: ");
+    fflush(stdin);
+    scanf("%d", &estadia.qtd_diarias);
+
+    quarto q;
+    fseek(arq_quartos, 0, SEEK_SET);
+    fread(&q, sizeof(q), 1, arq_quartos);
+
+    while (!feof(arq_quartos) && q.status == 0 && q.capacidade != estadia.qtd_hospedes )
+    {
+        fread(&q, sizeof(q), 1, arq_quartos);
+    }
+
+    estadia.numero_quarto = q.capacidade;
+
+    fclose(arq_quartos);
+
+
+    fseek(arq, 0, SEEK_END);
+    fwrite(&estadia, sizeof(estadia), 1, arq);
+    fflush(arq);
+
+    printf("Estadia cadastrada!\n\n");
+}
+
+void cadastrar_quarto(FILE *arq){
     quarto q;
 
     printf("Digite o codigo do quarto: ");
@@ -78,14 +115,12 @@ void cadastra_quarto(FILE *arq){
     printf("Digite a capacidade de hospedes do quarto: ");
     fflush(stdin);
     scanf("%d", &q.capacidade);
-    
+
     printf("Digite o valor da diaria: ");
     fflush(stdin);
     scanf("%d", &q.valordiaria);
-    
-    printf("Digite o status do quarto: ");
-    fflush(stdin);
-    scanf("%d", &q.status);
+
+    q.status = 0;
 
     fseek(arq, 0, SEEK_END);
     fwrite(&q, sizeof(q), 1, arq);
@@ -98,7 +133,7 @@ void imprime(FILE *arq, int pos, int tipo){
     if(tipo == 1){
         cliente c;
         fseek(arq, sizeof(c) * pos, SEEK_CUR);
-        printf("Codigo: %d\nNome: %s\nEndereco: %s\nTelefone: %s\n", 
+        printf("Codigo: %d\nNome: %s\nEndereco: %s\nTelefone: %s\n",
           &c.codigo, &c.nome, &c.endereco, &c.telefone);
     }
     if(tipo == 2){

@@ -4,6 +4,7 @@
 #include <string.h>
 #include "structs.h"
 #include "management.h"
+#include "management.c"
 
 void printMenu();
 
@@ -91,6 +92,10 @@ int main()
             system("clear");
             pesquisa(clientes, funcionarios);
             break;
+        case 6:
+            system("clear");
+            cadastrar_estadia(estadias, quartos);
+            break;
         }
 
     } while (op != 0);
@@ -108,6 +113,7 @@ void printMenu(){
     printf("3 - Cadastrar quarto\n");
     printf("4 - Mostrar clientes\n");
     printf("5 - Pesquisa\n");
+    printf("6 - Cadastrar Estadia\n");
     printf("0 - Sair do programa\n");
     printf("\nDigite sua opção: ");
 
