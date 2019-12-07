@@ -93,7 +93,7 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
     fseek(arq_quartos, 0, SEEK_SET);
     fread(&q, sizeof(q), 1, arq_quartos);
 
-    while (!feof(arq_quartos) && q.status == 0 && q.capacidade != estadia.qtd_hospedes )
+    while (!feof(arq_quartos) && q.status != 0 && q.capacidade != estadia.qtd_hospedes )
     {
         fread(&q, sizeof(q), 1, arq_quartos);
     }
