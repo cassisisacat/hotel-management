@@ -14,3 +14,9 @@ struct employee{
 
 };
 typedef struct employee funcionario;
+
+struct quarto{
+
+    int codigo, capacidade, disponivel;
+
+}; typedef struct quarto quarto;

@@ -24,7 +24,7 @@ void inclui_cliente(FILE *arquivo)
         fgets(m.endereco, 100, stdin);
         printf("\nDigite o telefone do cliente...: ");
         fflush(stdin);
-        fgets(m.telefone, 100, stdin);
+        fgets(m.telefone, 12, stdin);
         fseek(arquivo, 0, SEEK_END);
         fwrite(&m, sizeof(m), 1, arquivo);
         fflush(arquivo);
@@ -43,6 +43,7 @@ void inclui_funcionario(FILE *arquivo)
     fflush(stdin);
     scanf("%d", &F.codigo);
     posicao = localiza_cliente(arquivo, F.codigo);
+
     if (posicao == -1)
     {
         printf("\nDigite o nome do funcionario: ");
@@ -53,10 +54,10 @@ void inclui_funcionario(FILE *arquivo)
         fgets(F.cargo, 100, stdin);
         printf("\nDigite o telefone do funcionario: ");
         fflush(stdin);
-        scanf("%f", &F.telefone);
+        fgets(F.telefone, 12, stdin);
         printf("\nDigite o salario do funcionario: ");
         fflush(stdin);
-        scanf("%f", &F.telefone);
+        scanf("%f", &F.salario);
         fseek(arquivo, 0, SEEK_END);
         fwrite(&F, sizeof(F), 1, arquivo);
         fflush(arquivo);
@@ -67,14 +68,31 @@ void inclui_funcionario(FILE *arquivo)
     }
 }
 
+void cadastra_quarto(FILE *arq){
+    quarto q;
+
+    printf("Digite o codigo do quarto: ");
+    fflush(stdin);
+    scanf("%d", &q.codigo);
+
+    printf("Digite a capacidade de hospedes do quarto: ");
+    fflush(stdin);
+    scanf("%d", &q.capacidade);
+
+    fseek(arq, 0, SEEK_END);
+    fwrite(&q, sizeof(q), 1, arq);
+    fflush(arq);
+
+    printf("Quarto cadastrado!\n\n");
+}
+
 void imprime(FILE *arq, int pos, int tipo){
     if(tipo == 1){
         cliente c;
         fseek(arq, sizeof(c) * pos, SEEK_CUR);
         printf("Codigo: %d\nNome: %s\nEndereco: %s\nTelefone: %s\n", 
-            &c.codigo, &c.nome, &c.endereco, &c.telefone);
+          &c.codigo, &c.nome, &c.endereco, &c.telefone);
     }
-
     if(tipo == 2){
         funcionario f;
         fseek(arq, sizeof(f) * pos, SEEK_CUR);
@@ -89,8 +107,10 @@ void pesquisa(FILE *clientes, FILE *funcionarios){
     int op, cod, pos;
 
     printf("Pesquisar por:\n 1.Clientes\n 2.Funcionarios\n");
+    fflush(stdin);
     scanf("%d", &op);
     printf("Digite o codigo: ");
+    fflush(stdin);
     scanf("%d", &cod);
 
     pos = localiza_cliente(clientes, cod);
@@ -119,6 +139,9 @@ int localiza_cliente(FILE *arquivo, int codigo)
         }
         fread(&m, sizeof(m), 1, arquivo);
     }
+
+    fclose(arquivo);
+
     if (achou)
     {
         return posicao;
@@ -127,6 +150,7 @@ int localiza_cliente(FILE *arquivo, int codigo)
     {
         return -1;
     }
+
 }
 
 void imprime_cliente(FILE *arquivo)
@@ -142,4 +166,6 @@ void imprime_cliente(FILE *arquivo)
         printf("Telefone  ->  %s\n\n", m.telefone);
         fread(&m, sizeof(m), 1, arquivo);
     }
+
+    fclose(arquivo);
 }
