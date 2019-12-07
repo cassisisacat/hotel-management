@@ -2,17 +2,18 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include "cliente_struct.h"
+#include "structs.h"
 #include "management.h"
-#include "employee.h"
+
 void inclui_cliente(FILE *arquivo)
 {
     cliente m;
     int posicao;
-    printf("Digite o c�digo do cliente...:");
+    printf("Digite o codigo do cliente...:");
     fflush(stdin);
     scanf("%d", &m.codigo);
     posicao = localiza_cliente(arquivo, m.codigo);
+
     if (posicao == -1)
     {
         printf("\nDigite o nome do cliente...: ");
@@ -23,14 +24,14 @@ void inclui_cliente(FILE *arquivo)
         fgets(m.endereco, 100, stdin);
         printf("\nDigite o telefone do cliente...: ");
         fflush(stdin);
-        scanf("%f", &m.telefone);
+        fgets(m.telefone, 100, stdin);
         fseek(arquivo, 0, SEEK_END);
         fwrite(&m, sizeof(m), 1, arquivo);
         fflush(arquivo);
     }
     else
     {
-        printf("Codigo j� existe, inclus�o n�o realizada!");
+        printf("Codigo ja existe, inclusao nao realizada!");
     }
 }
 
@@ -63,6 +64,43 @@ void inclui_funcionario(FILE *arquivo)
     else
     {
         printf("Codigo j� existe, inclus�o n�o realizada!");
+    }
+}
+
+void imprime(FILE *arq, int pos, int tipo){
+    if(tipo == 1){
+        cliente c;
+        fseek(arq, sizeof(c) * pos, SEEK_CUR);
+        printf("Codigo: %d\nNome: %s\nEndereco: %s\nTelefone: %s\n", 
+            &c.codigo, &c.nome, &c.endereco, &c.telefone);
+    }
+
+    if(tipo == 2){
+        funcionario f;
+        fseek(arq, sizeof(f) * pos, SEEK_CUR);
+        printf("Codigo: %d\nNome: %s\nCargo: %s\nTelefone: %s\nSalario: %f",
+            &f.codigo, &f.nome, &f.cargo, &f.telefone, &f.salario);
+    }
+}
+
+void pesquisa(FILE *clientes, FILE *funcionarios){
+    system("clear");
+
+    int op, cod, pos;
+
+    printf("Pesquisar por:\n 1.Clientes\n 2.Funcionarios\n");
+    scanf("%d", &op);
+    printf("Digite o codigo: ");
+    scanf("%d", &cod);
+
+    pos = localiza_cliente(clientes, cod);
+
+    if(op == 1 && pos != -1 ){
+        imprime(clientes, pos, 1);
+    } else if (op == 2 && pos != -1){
+        imprime(funcionarios, pos, 2);
+    } else {
+        printf("Opcao inexistente!");
     }
 }
 
@@ -101,7 +139,7 @@ void imprime_cliente(FILE *arquivo)
         printf("C�digo ->  %d\n", m.codigo);
         printf("Nome ->  %s\n", m.nome);
         printf("Endere�o  ->  %s\n", m.endereco);
-        printf("Telefone  ->  %f\n\n", m.telefone);
+        printf("Telefone  ->  %s\n\n", m.telefone);
         fread(&m, sizeof(m), 1, arquivo);
     }
 }

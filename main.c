@@ -6,7 +6,6 @@
 #include "management.h"
 
 void printMenu();
-void criarArquivos(FILE *clientes, FILE *funcionarios, FILE *estadias, FILE *quartos);
 
 int main()
 {
@@ -18,40 +17,6 @@ int main()
     FILE *quartos;
 
     int op;
-
-    criarArquivos(clientes, funcionarios, estadias, quartos);
-
-    do{
-        printMenu();
-
-        scanf("%d", &op);
-
-        switch (op)
-        {
-        case 1:
-            system("clear");
-            printf("PAGINA DE CADASTRO...\n\n");
-            inclui_cliente(clientes);
-            break;
-        case 2:
-            system("clear");
-            printf("PAGINA DE CADASTRO...\n\n");
-            inclui_funcionario(clientes);
-            break;
-        case 3:
-            system("clear");
-            printf("Aqui esta as informa��es sobre os clientes ...\n\n");
-            imprime_cliente(clientes);
-            break;
-        }
-    } while (op != 4);
-
-    fclose(clientes);
-
-    return 0;
-}
-
-void criarArquivos( FILE *clientes, FILE *funcionarios, FILE *estadias, FILE *quartos){//, FILE *funcionarios ){
 
     if ((clientes = fopen("clientes.txt", "r+b")) == NULL){
 
@@ -97,6 +62,38 @@ void criarArquivos( FILE *clientes, FILE *funcionarios, FILE *estadias, FILE *qu
         }
     }
 
+    do{
+        printMenu();
+
+        scanf("%d", &op);
+
+        switch (op){
+        case 1:
+            system("clear");
+            printf("PAGINA DE CADASTRO...\n\n");
+            inclui_cliente(clientes);
+            break;
+        case 2:
+            system("clear");
+            printf("PAGINA DE CADASTRO...\n\n");
+            inclui_funcionario(funcionarios);
+            break;
+        case 3:
+            system("clear");
+            printf("Aqui esta as informa��es sobre os clientes ...\n\n");
+            imprime_cliente(clientes);
+            break;
+        case 4:
+            system("clear");
+            pesquisa(clientes, funcionarios);
+            break;
+        }
+
+    } while (op != 0);
+
+    fclose(clientes);
+
+    return 0;
 }
 
 void printMenu(){
@@ -105,7 +102,8 @@ void printMenu(){
     printf("1 - Cadastrar cliente\n");
     printf("2 - Cadastrar funcionario\n");
     printf("3 - Mostrar clientes\n");
-    printf("4 - Sair do programa\n");
+    printf("4 - Pesquisa\n");
+    printf("0 - Sair do programa\n");
     printf("\nDigite sua opção: ");
 
 }
