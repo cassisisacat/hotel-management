@@ -98,7 +98,7 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
         fread(&q, sizeof(q), 1, arq_quartos);
     }
 
-    estadia.numero_quarto = q.capacidade;
+    estadia.numero_quarto = q.numero;
 
     fclose(arq_quartos);
 
