@@ -78,6 +78,14 @@ void cadastra_quarto(FILE *arq){
     printf("Digite a capacidade de hospedes do quarto: ");
     fflush(stdin);
     scanf("%d", &q.capacidade);
+    
+    printf("Digite o valor da diaria: ");
+    fflush(stdin);
+    scanf("%d", &q.valordiaria);
+    
+    printf("Digite o status do quarto: ");
+    fflush(stdin);
+    scanf("%d", &q.status);
 
     fseek(arq, 0, SEEK_END);
     fwrite(&q, sizeof(q), 1, arq);
