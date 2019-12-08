@@ -114,7 +114,7 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
     printf("Estadia cadastrada!\n\n");
 }
 
-void cadastrar_quarto(FILE *arq){
+void cadastra_quarto(FILE *arq){
     quarto q;
 
     printf("Digite o codigo do quarto: ");
@@ -143,22 +143,22 @@ void imprime(FILE *arq, int pos, int tipo){
         cliente c;
         fseek(arq, sizeof(c) * pos, SEEK_CUR);
         printf("Codigo: %d\nNome: %s\nEndereco: %s\nTelefone: %s\n",
-          &c.codigo, &c.nome, &c.endereco, &c.telefone);
+            c.codigo, c.nome, c.endereco, c.telefone);
     }
     if(tipo == 2){
         funcionario f;
         fseek(arq, sizeof(f) * pos, SEEK_CUR);
         printf("Codigo: %d\nNome: %s\nCargo: %s\nTelefone: %s\nSalario: %f",
-            &f.codigo, &f.nome, &f.cargo, &f.telefone, &f.salario);
+            f.codigo, f.nome, f.cargo, f.telefone, f.salario);
     }
 }
 
-void pesquisa(FILE *clientes, FILE *funcionarios, FILE*arq_quartos){
+void pesquisa(FILE *clientes, FILE *funcionarios){
     system("clear");
 
     int op, cod, pos;
 
-    printf("Pesquisar por:\n 1.Clientes\n 2.Funcionarios\n 3.Quartos Disponíveis\n");
+    printf("Pesquisar por:\n 1.Clientes\n 2.Funcionarios\n");
     fflush(stdin);
     scanf("%d", &op);
     printf("Digite o codigo: ");
@@ -173,10 +173,6 @@ void pesquisa(FILE *clientes, FILE *funcionarios, FILE*arq_quartos){
         imprime(funcionarios, pos, 2);
     } else {
         printf("Opcao inexistente!");
-    }
-    if (op == 2 && pos != -1){
-        if (q.status == 0){
-        imprime (q.status, pos, 3);}
     }
 }
 
