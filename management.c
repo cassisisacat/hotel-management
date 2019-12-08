@@ -114,7 +114,7 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
     printf("Estadia cadastrada!\n\n");
 }
 
-void cadastra_quarto(FILE *arq){
+void cadastrar_quarto(FILE *arq){
     quarto q;
 
     printf("Digite o codigo do quarto: ");
