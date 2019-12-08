@@ -4,7 +4,6 @@
 #include <string.h>
 #include "structs.h"
 #include "management.h"
-#include "management.c"
 
 void printMenu();
 
@@ -70,39 +69,31 @@ int main()
 
         switch (op){
         case 1:
-            system("clear");
+            system("cls");
             printf("PAGINA DE CADASTRO...\n\n");
             inclui_cliente(clientes);
             break;
         case 2:
-            system("clear");
+            system("cls");
             printf("PAGINA DE CADASTRO...\n\n");
             inclui_funcionario(funcionarios);
             break;
         case 3:
-            system("clear");
-            cadastra_quarto(quartos);
+            system("cls");
+            cadastrar_quarto(quartos);
             break;
         case 4:
-            system("clear");
+            system("cls");
             printf("Aqui esta as informa��es sobre os clientes ...\n\n");
             imprime_cliente(clientes);
             break;
         case 5:
-            system("clear");
+            system("cls");
             pesquisa(clientes, funcionarios);
             break;
         case 6:
-            system("clear");
+            system("cls");
             cadastrar_estadia(estadias, quartos);
-            break;
-        case 7:
-            system("clear");
-            exclui_estadia(estadias, quartos);
-            break;
-        case 8:
-            system("clear");
-            imprimir_estadias_cliente(estadias);
             break;
         }
 
@@ -122,8 +113,6 @@ void printMenu(){
     printf("4 - Mostrar clientes\n");
     printf("5 - Pesquisa\n");
     printf("6 - Cadastrar Estadia\n");
-    printf("7 - Excluir Estadia\n");
-    printf("8 - Pesquisa Estadias por cliente\n");
     printf("0 - Sair do programa\n");
     printf("\nDigite sua opção: ");
 
