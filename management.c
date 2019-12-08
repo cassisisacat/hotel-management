@@ -97,6 +97,10 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
     {
         fread(&q, sizeof(q), 1, arq_quartos);
     }
+    
+    q.status = 1;
+    
+    fwrite(&q, sizeof(q), 1, arq_quartos);
 
     estadia.numero_quarto = q.numero;
 
@@ -149,12 +153,12 @@ void imprime(FILE *arq, int pos, int tipo){
     }
 }
 
-void pesquisa(FILE *clientes, FILE *funcionarios){
+void pesquisa(FILE *clientes, FILE *funcionarios, FILE*arq_quartos){
     system("clear");
 
     int op, cod, pos;
 
-    printf("Pesquisar por:\n 1.Clientes\n 2.Funcionarios\n");
+    printf("Pesquisar por:\n 1.Clientes\n 2.Funcionarios\n 3.Quartos Disponíveis\n");
     fflush(stdin);
     scanf("%d", &op);
     printf("Digite o codigo: ");
@@ -170,6 +174,15 @@ void pesquisa(FILE *clientes, FILE *funcionarios){
     } else {
         printf("Opcao inexistente!");
     }
+    if (op == 2 && pos != -1){
+        if (q.status == 0){
+        imprime (q.status, pos, 3);}
+    }
+}
+
+void exclui_estadia(FILE*arq, FILE*arq_quarto){
+    
+
 }
 
 int localiza_cliente(FILE *arquivo, int codigo)
