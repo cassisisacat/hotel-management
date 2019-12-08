@@ -247,6 +247,25 @@ int localiza_cliente(FILE *arquivo, int codigo)
 
 void imprimir_estadias_cliente(FILE*arq_estadia){
 
+    int cod_cliente;
+
+    printf("Digite o codigo do cliente para busca de estadias");
+    fflush(stdin);
+    scanf("%d", &cod_cliente);
+
+    estadia estadia;
+    fseek(arq_estadia, 0, SEEK_SET);
+    fread(&estadia, sizeof(estadia), 1, arq_estadia);
+
+    while (!feof(arq_estadia))
+    {
+        if( estadia.codigo == cod_cliente && estadia.valida == 0){
+            printf("DEstadia de codigo %d, para %d hospedes, no total de % diarias no quarto de numero %d . \n", estadia.codigo, estadia.qtd_hospedes, estadia.qtd_diarias, estadia.numero_quarto);
+        }
+        fread(&estadia, sizeof(estadia), 1, arq_estadia);
+    }
+
+    fclose(arq_estadia);
 }
 
 void imprime_cliente(FILE *arquivo)
