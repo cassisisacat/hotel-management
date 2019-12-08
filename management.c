@@ -119,7 +119,7 @@ void cadastrar_quarto(FILE *arq){
 
     printf("Digite o codigo do quarto: ");
     fflush(stdin);
-    scanf("%d", &q.codigo);
+    scanf("%d", &q.numero);
 
     printf("Digite a capacidade de hospedes do quarto: ");
     fflush(stdin);
@@ -183,7 +183,7 @@ void pesquisa(FILE *clientes, FILE *funcionarios, FILE*arq_quartos){
 void exclui_estadia(FILE*arq_estadia, FILE *arq_quarto){
 
     estadia estadia;
-    quarto q;
+    quarto quarto;
     int cod_estadia, valorTotal;
 
     printf("Digite o codigo de registro da estagia a ser excluida: ");
@@ -246,6 +246,10 @@ int localiza_cliente(FILE *arquivo, int codigo)
     {
         return -1;
     }
+
+}
+
+void imprimir_estadias_cliente(FILE*arq_estadia){
 
 }
 

@@ -26,4 +26,4 @@ struct estadia{
 
     int codigo, qtd_diarias, codigo_cliente, qtd_hospedes, numero_quarto, valida;
 
-}; typedef struct quarto quarto;
+}; typedef struct estadia estadia;
