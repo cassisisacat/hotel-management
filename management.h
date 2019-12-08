@@ -9,3 +9,5 @@ void imprime(FILE *arq, int pos, int tipo);
 void pesquisa(FILE *clientes, FILE *funcionarios);
 void exclui_estadia(FILE*arq_estadia, FILE *arq_quarto);
 void cadastrar_estadia(FILE *arq, FILE *arq_quartos);
+void imprimir_estadias_cliente(FILE*arq_estadia);
+
