@@ -97,15 +97,15 @@ void cadastrar_estadia(FILE *arq, FILE *arq_quartos){
     {
         fread(&q, sizeof(q), 1, arq_quartos);
     }
-    
+
     q.status = 1;
-    
+
     fwrite(&q, sizeof(q), 1, arq_quartos);
 
     estadia.numero_quarto = q.numero;
+    estadia.valida = 0;
 
     fclose(arq_quartos);
-
 
     fseek(arq, 0, SEEK_END);
     fwrite(&estadia, sizeof(estadia), 1, arq);
@@ -180,9 +180,44 @@ void pesquisa(FILE *clientes, FILE *funcionarios, FILE*arq_quartos){
     }
 }
 
-void exclui_estadia(FILE*arq, FILE*arq_quarto){
-    
+void exclui_estadia(FILE*arq_estadia, FILE *arq_quarto){
 
+    estadia estadia;
+    quarto q;
+    int cod_estadia, valorTotal;
+
+    printf("Digite o codigo de registro da estagia a ser excluida: ");
+    fflush(stdin);
+    scanf("%d", &cod_estadia);
+
+    fseek(arq_estadia, 0, SEEK_SET);
+    fread(&estadia, sizeof(estadia), 1, arq_estadia);
+
+    while (!feof(arq_estadia) && estadia.codigo != cod_estadia )
+    {
+        fread(&estadia, sizeof(estadia), 1, arq_estadia);
+    }
+
+    fseek(arq_quarto, 0, SEEK_SET);
+    fread(&quarto, sizeof(quarto), 1, arq_quarto);
+
+    while (!feof(arq_quarto) && quarto.numero != estadia.numero_quarto)
+    {
+        fread(&quarto, sizeof(quarto), 1, arq_quarto);
+    }
+
+    estadia.valida = 1;
+    quarto.status = 0;
+    valorTotal = estadia.qtd_diarias*quarto.valordiaria;
+
+    fwrite(&quarto, sizeof(quarto), 1, arq_quarto);
+    fclose(arq_quarto);
+
+    fwrite(&estadia, sizeof(estadia), 1, arq_estadia);
+    fclose(arq_estadia);
+
+    printf("Valor da hospedagem = %d \n", valorTotal);
+    printf("Estadia removida! \n");
 }
 
 int localiza_cliente(FILE *arquivo, int codigo)
