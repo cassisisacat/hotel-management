@@ -174,7 +174,7 @@ void pesquisa(FILE *clientes, FILE *funcionarios, FILE*arq_quartos){
     } else {
         printf("Opcao inexistente!");
     }
-    if (op == 2 && pos != -1){
+    if (op == 3 && pos != -1){
         if (q.status == 0){
         imprime (q.status, pos, 3);}
     }
