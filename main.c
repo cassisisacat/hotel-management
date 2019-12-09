@@ -95,6 +95,12 @@ int main()
             system("cls");
             cadastrar_estadia(estadias, quartos);
             break;
+        case 7:
+            system("cls");
+            exclui_estadia(estadias,quartos);
+        case 8:
+            system("cls");
+            imprimir_estadias_cliente(estadias);
         }
 
     } while (op != 0);
@@ -112,7 +118,9 @@ void printMenu(){
     printf("3 - Cadastrar quarto\n");
     printf("4 - Mostrar clientes\n");
     printf("5 - Pesquisa\n");
-    printf("6 - Cadastrar Estadia\n");
+    printf("6 - Cadastrar estadia\n");
+    printf("7 - Excluir estadia e saber o valor a ser pago\n");
+    printf("8 - Informacoes sobre estadia\n");
     printf("0 - Sair do programa\n");
     printf("\nDigite sua opção: ");
 
