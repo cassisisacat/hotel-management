@@ -182,7 +182,7 @@ void exclui_estadia(FILE*arq_estadia, FILE *arq_quarto){
     quarto quarto;
     int cod_estadia, valorTotal;
 
-    printf("Digite o codigo de registro da estagia a ser excluida: ");
+    printf("Digite o codigo de registro da estadia a ser excluida: ");
     fflush(stdin);
     scanf("%d", &cod_estadia);
 
@@ -249,7 +249,7 @@ void imprimir_estadias_cliente(FILE*arq_estadia){
 
     int cod_cliente;
 
-    printf("Digite o codigo do cliente para busca de estadias");
+    printf("Digite o codigo do cliente para busca de estadias: ");
     fflush(stdin);
     scanf("%d", &cod_cliente);
 
@@ -260,7 +260,7 @@ void imprimir_estadias_cliente(FILE*arq_estadia){
     while (!feof(arq_estadia))
     {
         if( estadia.codigo == cod_cliente && estadia.valida == 0){
-            printf("DEstadia de codigo %d, para %d hospedes, no total de % diarias no quarto de numero %d . \n", estadia.codigo, estadia.qtd_hospedes, estadia.qtd_diarias, estadia.numero_quarto);
+            printf("\nEstadia de codigo %d, para %d hospedes, no total de % diarias no quarto de numero %d . \n", estadia.codigo, estadia.qtd_hospedes, estadia.qtd_diarias, estadia.numero_quarto);
         }
         fread(&estadia, sizeof(estadia), 1, arq_estadia);
     }
@@ -275,9 +275,9 @@ void imprime_cliente(FILE *arquivo)
     fread(&m, sizeof(m), 1, arquivo);
     while (!feof(arquivo))
     {
-        printf("C�digo ->  %d\n", m.codigo);
+        printf("Código ->  %d\n", m.codigo);
         printf("Nome ->  %s\n", m.nome);
-        printf("Endere�o  ->  %s\n", m.endereco);
+        printf("Endereço  ->  %s\n", m.endereco);
         printf("Telefone  ->  %s\n\n", m.telefone);
         fread(&m, sizeof(m), 1, arquivo);
     }
