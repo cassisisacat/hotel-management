@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1575675437 source:c:\users\jaosi\desktop\hotel-management-master\hotel\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"cliente_struct.h"
+	"management.h"
+
+1575668094 c:\users\jaosi\desktop\hotel-management-master\hotel\cliente_struct.h
+
+1575673799 c:\users\jaosi\desktop\hotel-management-master\hotel\management.h
+	<stdio.h>
+
+1575674734 source:c:\users\jaosi\desktop\hotel-management-master\hotel\management.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"cliente_struct.h"
+	"management.h"
+	"employee.h"
+
+1575668292 c:\users\jaosi\desktop\hotel-management-master\hotel\employee.h
+
+1575849561 source:c:\users\jaosi\desktop\hotel antigo\hotel\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"structs.h"
+	"management.h"
+
+1575846636 c:\users\jaosi\desktop\hotel antigo\hotel\structs.h
+
+1575847504 c:\users\jaosi\desktop\hotel antigo\hotel\management.h
+	<stdio.h>
+
+1575847501 source:c:\users\jaosi\desktop\hotel antigo\hotel\management.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"structs.h"
+	"management.h"
+
+1575763114 c:\users\jaosi\desktop\hotel antigo\hotel\struct.h
+
+1575763217 c:\users\jaosi\desktop\hotel antigo\hotel\management.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<string.h>
+	"structs.h"
+	"management.h"
+

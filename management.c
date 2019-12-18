@@ -275,9 +275,9 @@ void imprime_cliente(FILE *arquivo)
     fread(&m, sizeof(m), 1, arquivo);
     while (!feof(arquivo))
     {
-        printf("Código ->  %d\n", m.codigo);
+        printf("C�digo ->  %d\n", m.codigo);
         printf("Nome ->  %s\n", m.nome);
-        printf("Endereço  ->  %s\n", m.endereco);
+        printf("Endere�o  ->  %s\n", m.endereco);
         printf("Telefone  ->  %s\n\n", m.telefone);
         fread(&m, sizeof(m), 1, arquivo);
     }

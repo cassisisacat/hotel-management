@@ -120,7 +120,7 @@ void printMenu(){
     printf("5 - Pesquisa\n");
     printf("6 - Cadastrar estadia\n");
     printf("7 - Excluir estadia e saber o valor a ser pago\n");
-    printf("8 - Mostre na tela todas as estadias de um determinado cliente\n");
+    printf("8 - Informacoes sobre estadia\n");
     printf("0 - Sair do programa\n");
     printf("\nDigite sua opção: ");
 
